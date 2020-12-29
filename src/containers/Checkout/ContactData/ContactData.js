@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import axios from '../../../axios-orders';
 
 import Button from '../../../components/UI/Button/Button';
@@ -8,12 +9,6 @@ import Input from '../../../components/UI/Input/Input';
 import './ContactData.css';
 
 const ContactData = (props) => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState({
-        street: '',
-        postalCode: '',
-    });
     const [orderForm, setOrderForm] = useState({
         name: {
             elementType: 'input',
@@ -113,7 +108,7 @@ const ContactData = (props) => {
         };
 
         const order = {
-            ingredients: props.ingredients,
+            ingredients: props.ings,
             price: props.price,
             orderData: formData,
         };
@@ -137,12 +132,12 @@ const ContactData = (props) => {
         };
 
         if (rules.minLength) {
-            isValid = value.minLength >= rules.minLength && isValid;
-        }
+            isValid = value.length >= rules.minLength && isValid;
+        };
 
         if (rules.maxLength) {
-            isValid = value.maxLength <= rules.maxLength && isValid;
-        }
+            isValid = value.length <= rules.maxLength && isValid;
+        };
 
         return isValid;
 
@@ -207,4 +202,12 @@ const ContactData = (props) => {
     );
 };
 
-export default ContactData;
+
+const mapStateToProps = (state) => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice,
+    };
+};
+
+export default connect(mapStateToProps)(ContactData);
