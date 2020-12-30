@@ -120,7 +120,7 @@ const ContactData = (props) => {
     const checkValidity = (value, rules) => {
         let isValid = true;
 
-        if(!rules) {
+        if (!rules) {
             return true;
         };
 
@@ -153,8 +153,9 @@ const ContactData = (props) => {
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
         let formIsValid = true;
+
         for (let inputIdentifier in updatedOrderForm) {
-            formIsValid = updatedOrderForm[inputIdentifier.valid] && formIsValid;
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
         }
 
         setOrderForm(updatedOrderForm);
