@@ -1,5 +1,3 @@
-import Checkout from "../../../containers/Checkout/Checkout"
-
 import React from 'react';
 
 import Burger from '../../Burger/Burger';
