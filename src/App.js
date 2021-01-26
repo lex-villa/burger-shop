@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Auth from './containers/Auth/Auth';
+import Logout from './containers/Auth/Logout/Logout';
 
 import './App.css';
 
@@ -26,6 +27,7 @@ function App() {
             <Route path='/checkout' render={(props) => <Checkout {...props} />} />
             <Route path='/orders' render={(props) => <Orders {...props} />} />
             <Route path='/auth' component={Auth} />
+            <Route path='/logout' component={Logout} />
             <Route path='/' component={BurgerBuilder} />
           </Switch>
         </Suspense>
