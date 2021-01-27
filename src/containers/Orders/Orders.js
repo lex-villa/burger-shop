@@ -8,10 +8,10 @@ import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 const Orders = (props) => {
-    const { onFetchOrders, token } = props;
+    const { onFetchOrders, token, userId } = props;
     useEffect(() => {
-        onFetchOrders(token);
-    }, [onFetchOrders, token]);
+        onFetchOrders(token, userId);
+    }, [onFetchOrders, token, userId]);
 
     let orders = <Spinner />
     if (!props.loading) {
@@ -38,12 +38,13 @@ const mapStateToProps = (state) => {
         orders: state.order.orders,
         loading: state.order.loading,
         token: state.auth.token,
+        userId: state.auth.userId
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
+        onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId)),
     };
 };
 
