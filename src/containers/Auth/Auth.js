@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ import * as actions from '../../store/actions/index';
 import './Auth.css';
 
 const Auth = (props) => {
+    const { buildingBurger, authRedirectPath, onSetAuthRedirectPath } = props;
+
     const [controls, setControls] = useState({
         email: {
             elementType: 'input',
@@ -43,6 +45,12 @@ const Auth = (props) => {
     });
 
     const [isSignUp, setIsSignUp] = useState(true);
+
+    useEffect(() => {
+        if (buildingBurger && authRedirectPath !== '/') {
+            onSetAuthRedirectPath();
+        }
+    }, [])
 
     const checkValidity = (value, rules) => {
         let isValid = true;
@@ -138,7 +146,7 @@ const Auth = (props) => {
 
     let authRedirect = null;
     if (props.isAuthenticated) {
-        authRedirect = <Redirect to='/' />
+        authRedirect = <Redirect to={props.authRedirectPath} />
     };
 
     return (
@@ -165,12 +173,15 @@ const mapStateToProps = (state) => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
+        buildingBurger: state.burgerBuilder.building,
+        authRedirectPath: state.auth.authRedirectPath,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
     };
 };
 
