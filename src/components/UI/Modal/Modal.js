@@ -2,7 +2,7 @@ import React from 'react';
 import Backdrop from '../Backdrop/Backdrop';
 import './Modal.css';
 
-const Modal = React.memo((props) => {
+const Modal = (props) => {
     const { isShown, modalClosed } = props;
 
     return (
@@ -19,8 +19,8 @@ const Modal = React.memo((props) => {
             </div>
         </>
     );
-});
+};
 
 export default React.memo(Modal, (prevProps, nextProps) => {
-    return nextProps.isShown === prevProps && nextProps.children === prevProps.children;
+    return nextProps.isShown === prevProps.isShown && nextProps.children === prevProps.children;
 });

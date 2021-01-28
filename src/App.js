@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 
@@ -16,8 +15,9 @@ const Orders = React.lazy(() => {
 const Checkout = React.lazy(() => {
   return import('./containers/Checkout/Checkout');
 });
-//import Checkout from './containers/Checkout/Checkout';
-//import Orders from './containers/Orders/Orders';
+const Auth = React.lazy(() => {
+  return import('./containers/Auth/Auth');
+});
 
 
 function App(props) {
@@ -29,7 +29,7 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route path='/auth' component={Auth} />
+      <Route path='/auth' render={(props) => <Auth {...props} />} />
       <Route path='/' exact component={BurgerBuilder} />
       <Redirect to='/' />
     </Switch>
@@ -41,7 +41,7 @@ function App(props) {
         <Route path='/checkout' render={(props) => <Checkout {...props} />} />
         <Route path='/orders' render={(props) => <Orders {...props} />} />
         <Route path='/logout' component={Logout} />
-        <Route path='/auth' component={Auth} />
+        <Route path='/auth' render={(props) => <Auth {...props} />} />
         <Route path='/' exact component={BurgerBuilder} />
         <Redirect to='/' />
       </Switch>
