@@ -11,7 +11,7 @@ import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 
 
-const BurgerBuilder = (props) => {
+export const BurgerBuilder = (props) => {
     const { onInitIngredients, error } = props
     const [purchasing, setPurchasing] = useState(false);
 
