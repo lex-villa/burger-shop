@@ -145,9 +145,15 @@ const Auth = (props) => {
     };
 
     let authRedirect = null;
-    if (props.isAuthenticated) {
-        authRedirect = <Redirect to={props.authRedirectPath} />
-    };
+    // if (props.isAuthenticated) {
+    //     authRedirect = <Redirect to={props.authRedirectPath} />
+    // };
+    if (props.isAuthenticated && props.buildingBurger) {
+        authRedirect = <Redirect to="/checkout" />
+    }
+    else if (props.isAuthenticated) {
+        authRedirect = <Redirect to="/" />
+    }
 
     return (
         <div className='Auth'>

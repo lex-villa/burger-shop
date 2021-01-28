@@ -41,6 +41,7 @@ function App(props) {
         <Route path='/checkout' render={(props) => <Checkout {...props} />} />
         <Route path='/orders' render={(props) => <Orders {...props} />} />
         <Route path='/logout' component={Logout} />
+        <Route path='/auth' component={Auth} />
         <Route path='/' exact component={BurgerBuilder} />
         <Redirect to='/' />
       </Switch>
